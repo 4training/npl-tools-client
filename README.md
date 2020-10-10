@@ -5,6 +5,8 @@ https://www.4training.net/genmapper
 
 This project application that houses the genmapper tools used in 4training.net.
 
+We have plans and visions to use the app to help it's users to achieve their full potential. To find out how you can help, contact us or look at the issues.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
