@@ -29,8 +29,6 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 tbd
 
-Run `npm run ghpages`
-
 ## Further help
 
 Contact kenjoo.dev@gmail.com
