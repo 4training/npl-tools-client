@@ -1,9 +1,9 @@
-https://noplaceleft.tools
+https://www.4training.net/genmapper
 
 
-# NoPlaceLeft Tools App
+# Genmapper Tools App
 
-This project application that houses tools used in reaching NoPlaceLeft
+This project application that houses the genmapper tools used in 4training.net.
 
 ## Development server
 
@@ -27,12 +27,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Publishing
 
-From Master Branch
-
->To publish to dev.noplaceleft.tools
+tbd
 
 Run `npm run ghpages`
 
 ## Further help
 
-Contact dev@noplaceleft.tools
+Contact kenjoo.dev@gmail.com
