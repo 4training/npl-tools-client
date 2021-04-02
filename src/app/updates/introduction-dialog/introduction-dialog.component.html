@@ -1,0 +1,21 @@
+<div mat-dialog-title>Welcome to the genmapper!</div>
+
+<div mat-dialog-content fxLayout="column" fxLayoutGap="24px">
+    <p class="introduction_text">
+        Privacy is very important for us and we're not storing any of your data
+        on our server. More specifically, this app is running solely in your
+        browser and no information of it is sent anywhere else. Please export
+        any church tree that you're creating and save it on your computer to
+        make sure it doesn't get losted. Additionally the data is stored in the
+        local storage of your browser and you can continue when you come back.
+        Caution: When you're deleting cookies / temporary data in your browser,
+        this data gets deleted! Also you won't see your data when you use a
+        different device.
+    </p>
+</div>
+
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+    <button mat-flat-button color="primary" [mat-dialog-close]="true">
+        {{ "Common_Ok" | locale | async }}
+    </button>
+</div>
