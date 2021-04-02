@@ -1,30 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { UpdatesService } from '../updates.service';
-import { WhatsNewDialogComponent } from '../whats-new-dialog/whats-new-dialog.component';
-
-const oldKeys = [
-    'update-v1',
-    'update-v2',
-    'update-v3',
-    'update-v4',
-];
-
-oldKeys.forEach(key => localStorage.removeItem(key));
+import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material";
+import { UpdatesService } from "../updates.service";
+import { IntroductionDialogComponent } from "../introduction-dialog/introduction-dialog.component";
 
 @Component({
-    selector: 'app-updates',
-    templateUrl: './updates.component.html',
-    styleUrls: ['./updates.component.scss']
+    selector: "app-updates",
+    templateUrl: "./updates.component.html",
+    styleUrls: ["./updates.component.scss"],
 })
 export class UpdatesComponent implements OnInit {
+    private updateKey = "introduction";
 
-    private updateKey = 'update-v5';
-
-    constructor(
-        private dialog: MatDialog,
-        private service: UpdatesService
-    ) { }
+    constructor(private dialog: MatDialog, private service: UpdatesService) {}
 
     public ngOnInit(): void {
         this.service.get().subscribe(() => this.showDialog());
@@ -36,15 +23,13 @@ export class UpdatesComponent implements OnInit {
 
     private showDialog(): void {
         this.dialog
-            .open(WhatsNewDialogComponent,
-                {
-                    autoFocus: false
-                }
-            )
+            .open(IntroductionDialogComponent, {
+                autoFocus: false,
+            })
             .afterClosed()
-            .subscribe(result => {
+            .subscribe((result) => {
                 if (result) {
-                    localStorage.setItem(this.updateKey, 'true');
+                    localStorage.setItem(this.updateKey, "true");
                 }
             });
     }
