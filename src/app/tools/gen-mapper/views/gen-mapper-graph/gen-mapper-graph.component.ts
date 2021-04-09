@@ -1,20 +1,32 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
-import { Device } from '@core/platform';
-import { Unsubscribable } from '@core/Unsubscribable';
-import { NodeDto } from '@models/node.model';
-import { Template } from '@models/template.model';
-import { takeUntil } from 'rxjs/operators';
-import { NodeDatum } from '../../gen-mapper.interface';
-import { D3NodeTree } from '../../node-tree/d3-node-tree';
-import { NodeTreeService } from '../../node-tree/node-tree.service';
-
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    EventEmitter,
+    HostListener,
+    Input,
+    NgZone,
+    OnInit,
+    Output,
+    ViewChild,
+} from "@angular/core";
+import { Device } from "@core/platform";
+import { Unsubscribable } from "@core/Unsubscribable";
+import { NodeDto } from "@models/node.model";
+import { Template } from "@models/template.model";
+import { takeUntil } from "rxjs/operators";
+import { NodeDatum } from "../../gen-mapper.interface";
+import { D3NodeTree } from "../../node-tree/d3-node-tree";
+import { NodeTreeService } from "../../node-tree/node-tree.service";
 
 @Component({
-    selector: 'app-gen-mapper-graph',
-    templateUrl: './gen-mapper-graph.component.html',
-    styleUrls: ['./gen-mapper-graph.component.scss']
+    selector: "app-gen-mapper-graph",
+    templateUrl: "./gen-mapper-graph.component.html",
+    styleUrls: ["./gen-mapper-graph.component.scss"],
 })
-export class GenMapperGraphComponent extends Unsubscribable implements AfterViewInit, OnInit {
+export class GenMapperGraphComponent
+    extends Unsubscribable
+    implements AfterViewInit, OnInit {
     @Input()
     public template: Template;
 
@@ -30,7 +42,7 @@ export class GenMapperGraphComponent extends Unsubscribable implements AfterView
     @Output()
     public sortChange = new EventEmitter<NodeDto[]>();
 
-    @ViewChild('genMapperGraphSvg', { static: false })
+    @ViewChild("genMapperGraphSvg", { static: false })
     public graphSvg: ElementRef;
 
     public d3NodeTree: D3NodeTree;
@@ -38,10 +50,12 @@ export class GenMapperGraphComponent extends Unsubscribable implements AfterView
     constructor(
         private elementRef: ElementRef,
         private nodeTree: NodeTreeService,
-        private ngZone: NgZone,
-    ) { super(); }
+        private ngZone: NgZone
+    ) {
+        super();
+    }
 
-    @HostListener('window:resize')
+    @HostListener("window:resize")
     public onWindowResize(): void {
         this.d3NodeTree.resize();
     }
@@ -49,13 +63,23 @@ export class GenMapperGraphComponent extends Unsubscribable implements AfterView
     public ngOnInit(): void {
         this.nodeTree.treeData$
             .pipe(takeUntil(this.unsubscribe))
-            .subscribe(result => {
+            .subscribe((result) => {
                 if (result && this.d3NodeTree) {
                     this.ngZone.run(() => {
                         this.d3NodeTree.update(result, false);
                     });
                 }
             });
+
+        const showLeaveWarning =
+            localStorage.getItem("showLeaveWarning") === "true";
+
+        if (showLeaveWarning) {
+            window.addEventListener("beforeunload", (e) => {
+                e.preventDefault();
+                e.returnValue = "";
+            });
+        }
     }
 
     public ngAfterViewInit(): void {
@@ -97,7 +121,6 @@ export class GenMapperGraphComponent extends Unsubscribable implements AfterView
         this.d3NodeTree.nodeClick
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((node: NodeDatum) => {
-
                 if (Device.isDesktop) {
                     this.nodeClick.emit(node.data);
                 }
@@ -105,13 +128,13 @@ export class GenMapperGraphComponent extends Unsubscribable implements AfterView
 
         this.d3NodeTree.addButtonClick
             .pipe(takeUntil(this.unsubscribe))
-            .subscribe(d => {
+            .subscribe((d) => {
                 this.addNode.emit(d.data);
             });
 
         this.d3NodeTree.sortOrderChange
             .pipe(takeUntil(this.unsubscribe))
-            .subscribe(result => {
+            .subscribe((result) => {
                 this.sortChange.emit(result);
             });
     }

@@ -6,7 +6,18 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./introduction-dialog.component.scss"],
 })
 export class IntroductionDialogComponent implements OnInit {
+    public checked = false;
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.checked = localStorage.getItem("showLeaveWarning") === "true";
+    }
+
+    public toggle({ checked }: { checked: boolean }): void {
+        if (checked) {
+            localStorage.setItem("showLeaveWarning", "true");
+        } else {
+            localStorage.setItem("showLeaveWarning", "false");
+        }
+    }
 }

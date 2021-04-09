@@ -14,6 +14,10 @@
     </p>
 </div>
 
+<mat-checkbox (change)="$event ? toggle($event) : null" [checked]="checked"
+    >Warn me when I'm about to leave with unexported changes</mat-checkbox
+>
+
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
     <button mat-flat-button color="primary" [mat-dialog-close]="true">
         {{ "Common_Ok" | locale | async }}
