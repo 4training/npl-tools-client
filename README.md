@@ -1,9 +1,9 @@
-https://www.4training.net/genmapper
-
+# Discontinued!
+We'll re-implement the genmapper with dart/flutter in the repository https://www.github.com/4training/genmapper
 
 # Genmapper Tools App
-
 This project application that houses the genmapper tools used in 4training.net.
+https://www.4training.net/genmapper
 
 We have plans and visions to use the app to help it's users to achieve their full potential. To find out how you can help, contact us or look at the [issues](https://github.com/4training/npl-tools-client/issues).
 
